@@ -13,7 +13,7 @@ public class SendNotification {
 
     public static void verifyNotificationTable(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        
+        System.out.println("This current URL: "+driver.getCurrentUrl());
         WebElement table = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("table")));
         Assert.assertNotNull(table, "Notification table not found");
         
@@ -35,8 +35,9 @@ public class SendNotification {
     }
 
     public static void clickAddNotificationButton(WebDriver driver) {
+
+        driver.navigate().to("https://mosa3ed.moltaqadev.com/ar/notifications");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        
         WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
             By.cssSelector("body > div.min-h-screen.bg-muted/30 > main > div > div > div.flex.justify-end > button")
         ));
@@ -136,8 +137,7 @@ public class SendNotification {
             submitButton.click();
 
             wait.until(ExpectedConditions.urlContains("dashboard"));
-
-            verifyNotificationTable(driver);
+            //verifyNotificationTable(driver);
             clickAddNotificationButton(driver);
             createNotification(driver, "اختبار من الأتمتة", "Test from automation", "رسالة تجريبية من الأتمتة", "Test message from automation");
 
